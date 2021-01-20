@@ -5,7 +5,6 @@ const client = new Discord.Client();
 
 const commandHandler = require("./commands");
 
-// need to move this .env file
 client.login(process.env.BOTTOKEN);
 
 client.on('message', commandHandler);
