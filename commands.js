@@ -1,34 +1,36 @@
-const reviewPR             = require("./commands/reviewPR.js");
-const getRepo              = require("./commands/getRepo.js");
-const createPR             = require("./commands/createPR.js");
-const createIssue          = require("./commands/createIssue.js");
-const createIssueComment   = require("./commands/createIssueComment.js");
-const getNumPRs            = require("./commands/getNumPRs.js");
-const getPROwners          = require("./commands/getPROwners.js");
-const getLabels            = require("./commands/getLabels.js");
-const getIssuesWithLabel   = require("./commands/getIssuesWithLabel.js");
-const getAssigneeIssues    = require("./commands/getAssigneeIssues.js");
-const getIssues            = require("./commands/getIssues.js");
-const getIssue             = require("./commands/getIssue.js");
-const getSha               = require("./commands/getSha.js");
-const mergePR              = require("./commands/mergePR.js");
-const mergeBranch          = require("./commands/mergeBranch.js");
-const listPRs              = require("./commands/listPRs.js");
-const getUser              = require("./commands/getUser.js");
-const getGitTree           = require("./commands/getGitTree.js");
-const listBranches         = require("./commands/listBranches.js");
-const getCommits           = require("./commands/getCommits.js");
-const getCommitPath        = require("./commands/getCommitPath.js");
-const getCommitBuildStatus = require("./commands/getCommitBuildStatus.js");
-const getGithubURL         = require("./commands/getGithubURL.js");
-const help                 = require("./commands/help.js");
+const ApprovePR            = require("./commands/ApprovePR.js");
+const GetReviewers         = require("./commands/GetReviewers.js");
+const CreateIssue          = require("./commands/createIssue.js");
+const CloseIssue           = require("./commands/CloseIssue.js");
+const AddLabelToIssue      = require("./commands/AddLabelToIssue.js");
+const AddUserToIssue       = require("./commands/AddUserToIssue.js");
+const CreateIssueComment   = require("./commands/CreateIssueComment.js");
+const GetLabels            = require("./commands/GetLabels.js");
+const GetAssigneeIssues    = require("./commands/GetAssigneeIssues.js");
+const GetIssuesWithLabel   = require("./commands/GetIssuesWithLabel.js");
+const GiveOwnerName        = require("./commands/GiveOwnerName.js");
+const GiveRepoName         = require("./commands/GiveRepoName.js");
+const GetIssueAssignees    = require("./commands/GetIssueAssignees.js");
+const GetMedianReviewTime  = require("./commands/GetMedianReviewTime.js");
+const MergeBranch          = require("./commands/MergeBranch.js");
+const MergePR              = require("./commands/MergePR.js");
+const NumIssues            = require("./commands/NumIssues.js");
+const CreatePR             = require("./commands/CreatePR.js");
+const NumPrs               = require("./commands/NumPrs.js");
+const GetPROwners          = require("./commands/GetPROwners.js");
+const GetOldestIssue       = require("./commands/GetOldestIssue.js");
+const GetNumAssignedOpen   = require("./commands/GetNumAssignedOpen.js");
+const GetLastContributor   = require("./commands/GetLastContributor.js");
+const GetUnassignedTasks   = require("./commands/GetUnassignedTasks.js");
+const GetBuildStatus       = require("./commands/GetBuildStatus.js");
+const Help                 = require("./commands/Help.js");
 
 
 
-const commands = { reviewPR, getRepo, createPR, createIssue, createIssueComment, getNumPRs, getPROwners, 
-                   getLabels, getIssuesWithLabel, getAssigneeIssues, getIssues, getIssue, getSha, mergePR, 
-                   mergeBranch, listPRs, getUser, getGitTree, listBranches, getCommits, getCommitPath, 
-                   getCommitBuildStatus, getGithubURL, help};
+const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
+    GetLabels, GetAssigneeIssues, GetIssuesWithLabel, GiveOwnerName, GiveRepoName, GetIssueAssignees, GetMedianReviewTime, 
+    MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
+    GetNumAssignedOpen, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help};
 
 module.exports = async function(message) {
     let args = message.content.split(" ");
