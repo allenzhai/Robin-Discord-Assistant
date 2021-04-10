@@ -36,13 +36,12 @@ module.exports = async function(message) {
     let args = message.content.split(" ");
     let command =  args.shift();
 
-
     if (command.charAt(0) === "#") {
         // Robin Commands
         console.log("Valid Robin Command");
         command = command.substring(1);
         console.log(command);
 
-        commands[command](message, args);
+        commands[command](args);
     }
 }
