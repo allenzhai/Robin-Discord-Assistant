@@ -4,7 +4,7 @@ const { Client } = require('discord.js');
 const API = 'https://robinrestapi.herokuapp.com/';
 
 // #AddLabelToIssue label issueNum
-module.exports = async function(args, repo, owner) {
+module.exports = async function(args, repo, owner, token) {
     const label = args[0];
     const issue_num = args[1];
     const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
@@ -21,11 +21,12 @@ module.exports = async function(args, repo, owner) {
         repoLabels.push(label);
     
         const body = {
-            labels : repoLabels
+            labels : repoLabels,
+            token  : token
         }
 
         const result = await axios.patch(`${API}issue/${owner}/${repo}/${issue_num}/update`,
-            body
+            body            
         );
 
         if (result.status == 200) {

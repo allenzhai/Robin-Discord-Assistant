@@ -1,3 +1,3 @@
-module.exports = function(message, args) {
-    message.channel.send("Command not yet built");
+module.exports = async function(message, args) {
+    await message.channel.send("Command not yet built");
 }

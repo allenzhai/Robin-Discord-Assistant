@@ -24,15 +24,15 @@ const GetLastContributor   = require("./commands/GetLastContributor.js");
 const GetUnassignedTasks   = require("./commands/GetUnassignedTasks.js");
 const GetBuildStatus       = require("./commands/GetBuildStatus.js");
 const Help                 = require("./commands/Help.js");
-
+const GetGithubToken      = require("./commands/getGithubToken.js");
 
 
 const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
     GetLabels, GetAssigneeIssues, GetIssuesWithLabel, GiveOwnerName, GiveRepoName, GetIssueAssignees, GetMedianReviewTime, 
     MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
-    GetNumAssignedOpen, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help};
+    GetNumAssignedOpen, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, GetGithubToken};
 
-module.exports = async function(message) {
+module.exports = async function(message, users) {
     let args = message.content.split(" ");
     let command =  args.shift();
 
@@ -42,6 +42,18 @@ module.exports = async function(message) {
         command = command.substring(1);
         console.log(command);
 
-        commands[command](args);
+        if (command === "GetGithubToken"){
+            token = await commands[command](args)
+            users.set(message.author.id, token);
+            await message.author.send(`Updated Token to ${token}`);
+        }
+        else{
+            commands[command](args);
+            await message.author.send(`done`);
+        }
     }
+    // check if it is a text channel
+    await message.channel.bulkDelete(20, true)
+    .then(messages => console.log(`Bulk deleted ${messages.size} messages`))
+    .catch(console.error);
 }
