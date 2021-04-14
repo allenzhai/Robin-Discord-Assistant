@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const ApprovePR            = require("./commands/ApprovePR.js");
 const GetReviewers         = require("./commands/GetReviewers.js");
 const CreateIssue          = require("./commands/createIssue.js");
@@ -24,13 +26,16 @@ const GetLastContributor   = require("./commands/GetLastContributor.js");
 const GetUnassignedTasks   = require("./commands/GetUnassignedTasks.js");
 const GetBuildStatus       = require("./commands/GetBuildStatus.js");
 const Help                 = require("./commands/Help.js");
-const GetGithubToken      = require("./commands/getGithubToken.js");
+const SetGithubToken      = require("./commands/SetGithubToken.js");
+
+const aesjs = require('aes-js');
+
 
 
 const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
     GetLabels, GetAssigneeIssues, GetIssuesWithLabel, GiveOwnerName, GiveRepoName, GetIssueAssignees, GetMedianReviewTime, 
     MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
-    GetNumAssignedOpen, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, GetGithubToken};
+    GetNumAssignedOpen, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken};
 
 module.exports = async function(message, users) {
     let args = message.content.split(" ");
@@ -42,9 +47,19 @@ module.exports = async function(message, users) {
         command = command.substring(1);
         console.log(command);
 
-        if (command === "GetGithubToken"){
-            token = await commands[command](args)
-            users.set(message.author.id, token);
+        if (command === "SetGithubToken"){
+            var token = await commands[command](args);
+            var key = [];
+            for (var i = 0; i < process.env.KEY.length; i++) {
+                key.push(process.env.KEY.charCodeAt(i));
+            }
+
+            var textBytes = aesjs.utils.utf8.toBytes(token);
+
+            var aesCtr = new aesjs.ModeOfOperation.ctr(key);
+            var encryptedBytes = aesCtr.encrypt(textBytes);
+            var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+            users.set(message.author.id, encryptedHex);
             await message.author.send(`Updated Token to ${token}`);
         }
         else{
@@ -53,7 +68,9 @@ module.exports = async function(message, users) {
         }
     }
     // check if it is a text channel
-    await message.channel.bulkDelete(20, true)
-    .then(messages => console.log(`Bulk deleted ${messages.size} messages`))
-    .catch(console.error);
+    if (message.channel.type != 'dm'){
+        await message.channel.bulkDelete(20, true)
+        .then(messages => console.log(`Bulk deleted ${messages.size} messages`))
+        .catch(console.error);
+    }
 }
