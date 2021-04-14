@@ -7,4 +7,8 @@ const commandHandler = require("./commands");
 
 client.login(process.env.BOTTOKEN);
 
-client.on('message', commandHandler);
+users = new Map();
+
+client.on('message', (msg) => {
+    commandHandler(msg, users);
+});
