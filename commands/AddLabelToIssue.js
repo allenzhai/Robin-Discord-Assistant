@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { Client } = require('discord.js');
 
 const API = 'https://robinrestapi.herokuapp.com/';
 
@@ -7,9 +6,9 @@ const API = 'https://robinrestapi.herokuapp.com/';
 module.exports = async function(args, repo, owner, token) {
     const label = args[0];
     const issue_num = args[1];
-    const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
     var message = `There was a problem adding ${label} to ${issue_num}`;
-
+    const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
+    
     if (response.status == 200) {
         var repoLabels = [];
         var responseData = response.data.labels;
