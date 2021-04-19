@@ -1,4 +1,4 @@
-const AddLabelToIssue = require("../AddLabelToIssue");
+const AddUserToIssue = require("../AddUserToIssue");
 const {rest} = require("msw");
 const {setupServer} = require("msw/node");
 const { default: axios } = require("axios");
@@ -11,17 +11,7 @@ const server = setupServer(
     rest.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json({
           "number": 1337,
-          "labels": [
-            {
-              "id": 2064120960,
-              "node_id": "MDU6TGFiZWwyMDY0MTIwOTYw",
-              "url": "https://api.github.com/repos/test",
-              "name": "testLabel",
-              "color": "d69f46",
-              "default": false,
-              "description": ""
-            }
-          ]
+          "assignees": [ {login: "Alice"}, {login: "Bob"}]
       }))}),
     rest.patch(`${API}issue/${owner}/${repo}/${issue_num}/update`, (req, res, ctx) => {
       return res(ctx.status(200))
@@ -31,10 +21,10 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
-test("adds label to issue", async() => {
-    const content = await AddLabelToIssue(['bug, P1', issue_num],  repo, owner);
+test("adds user to issue", async() => {
+    const content = await AddUserToIssue(['John, Maggy', issue_num],  repo, owner);
 
-    expect(content).toBe("Sucessfully added bug, P1 to 1337");
+    expect(content).toBe("Sucessfully added John, Maggy to 1337");
 });
 
 test("handles failure", async() => {
@@ -46,5 +36,5 @@ test("handles failure", async() => {
     })
   );
 
-  await expect(AddLabelToIssue(['bug, P1', issue_num],  repo, owner)).rejects.toThrow("404");
+  await expect(AddUserToIssue(['John, Danny', issue_num],  repo, owner)).rejects.toThrow("404");
 });

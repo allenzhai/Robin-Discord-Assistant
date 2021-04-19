@@ -4,23 +4,27 @@ const API = 'https://robinrestapi.herokuapp.com/';
 
 // #AddLabelToIssue label issueNum
 module.exports = async function(args, repo, owner, token) {
-    const label = args[0];
+    var labels = args[0];
+    labels = labels.split(", ");
     const issue_num = args[1];
-    var message = `There was a problem adding ${label} to ${issue_num}`;
+    var message = `There was a problem adding ${args[0]} to ${issue_num}`;
     const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
     
     if (response.status == 200) {
-        var repoLabels = [];
+        var issueLabels = [];
         var responseData = response.data.labels;
     
         for (var i = 0; i < responseData.length; i++) {
-            repoLabels.push(responseData[i].name);
+            issueLabels.push(responseData[i].name);
         }
     
-        repoLabels.push(label);
-    
+        for (var i = 0; i < labels.length; i++){
+            issueLabels.push(labels[i]);
+        }
+        console.log(issueLabels);
+        
         const body = {
-            labels : repoLabels,
+            labels : issueLabels,
             token  : token
         }
 
@@ -29,7 +33,7 @@ module.exports = async function(args, repo, owner, token) {
         );
 
         if (result.status == 200) {
-            message = `Sucessfully added ${label} to ${issue_num}`;
+            message = `Sucessfully added ${args[0]} to ${issue_num}`;
         }
     }
 
