@@ -38,7 +38,7 @@ expectedPR += '#ApprovePR [PR number] [comment]\n';              // ApprovePR
 expectedPR += '#CreatePR [title] [head branch] [base branch]\n';   // CreatePR
 expectedPR += '#GetMedianReviewTime\n';                            // GetMedianReviewTime
 expectedPR += '#GetPROwners\n';                                    // GetPROwners
-expectedPR += '#GetReviewers\n';                                   // GetReviewers
+expectedPR += '#GetReviewers [PR number]\n';                       // GetReviewers
 expectedPR += '#MergePR [PR number] [message]\n';                  // Merge PR
 expectedPR += '#NumPRs\n';                                         // NumPRs
 
