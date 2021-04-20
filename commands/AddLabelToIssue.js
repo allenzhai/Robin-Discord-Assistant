@@ -21,7 +21,6 @@ module.exports = async function(args, repo, owner, token) {
         for (var i = 0; i < labels.length; i++){
             issueLabels.push(labels[i]);
         }
-        console.log(issueLabels);
         
         const body = {
             labels : issueLabels,

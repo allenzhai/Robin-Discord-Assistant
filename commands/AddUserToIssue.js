@@ -22,7 +22,7 @@ module.exports = async function(args, repo, owner, token) {
         for (var i = 0; i < names.length; i++){
             issueNames.push(names[i]);
         }
-        console.log(issueNames);
+
         const body = {
             assignees : issueNames,
             token  : token

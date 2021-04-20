@@ -35,7 +35,7 @@ module.exports =  function(which, repo, owner) {
                 message += '#CreatePR [title] [head branch] [base branch]\n';   // CreatePR
                 message += '#GetMedianReviewTime\n';                            // GetMedianReviewTime
                 message += '#GetPROwners\n';                                    // GetPROwners
-                message += '#GetReviewers\n';                                   // GetReviewers
+                message += '#GetReviewers [PR number]\n';                       // GetReviewers
                 message += '#MergePR [PR number] [message]\n';                  // Merge PR
                 message += '#NumPRs\n';                                         // NumPRs
                 break;
