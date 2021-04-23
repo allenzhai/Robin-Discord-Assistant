@@ -53,16 +53,17 @@ module.exports =  function(which, repo, owner) {
                 message += '#SetRepoName [repo name]\n';                       // GiveRepoName
                 message += '#SetGithubToken [token]\n';                        // SetGithubToken
                 break;
-            default:
-                message += '\nMake sure to give set owner and repo names under \'Help Settings\'\n';
-                message += '#Help Branch for commands related to branches\n';
-                message += '#Help Commit for commands related to commits\n';
-                message += '#Help Issue for commands related to issues\n';
-                message += '#Help PR for commands related to PRs\n';
-                message += '#Help Repo for commands related to repos\n';
-                message += '#Help Settings for commands related to setting up session\n';
-                break;
             }
+    }
+
+    if (which.length == 0){
+        message += '\nMake sure to give set owner and repo names under \'Help Settings\'\n';
+        message += '#Help Branch for commands related to branches\n';
+        message += '#Help Commit for commands related to commits\n';
+        message += '#Help Issue for commands related to issues\n';
+        message += '#Help PR for commands related to PRs\n';
+        message += '#Help Repo for commands related to repos\n';
+        message += '#Help Settings for commands related to setting up session\n';
     }
     
     return message

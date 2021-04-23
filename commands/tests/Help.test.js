@@ -55,15 +55,10 @@ expectedSettings += '#SetRepoName [repo name]\n';                       // GiveR
 expectedSettings += '#SetGithubToken [token]\n';                        // SetGithubToken
 
 test("returns default message", async() => {
-    const args = [null];
-    const args2 = [""];
-
+    const args = [];
     let  content = Help(args);
-
+    
     expect(content).toBe(expectedDefault);
-
-    let content2 = Help(args2);
-    expect(content2).toBe(expectedDefault);
 });
 
 test("returns Branch message", () => {
