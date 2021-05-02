@@ -9,7 +9,7 @@ module.exports = async function(args, repo, owner, token) {
 
     const issue_num = args[1];
     var message = `There was a problem adding ${args[0]} to ${issue_num}`;
-    const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
+    const response = await axios.get(`${API}issue/${owner}/${repo}/${issue_num}`);
     
     if (response.status == 200) {
         var issueNames = [];

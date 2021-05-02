@@ -10,7 +10,7 @@ const assignee = 'Alice'
 const server = setupServer(
     rest.get(`${API}issue/${owner}/${repo}/assignee/${assignee}`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(
-          {items: [{title: 'issue1'}]}
+          [{title: 'issue1'}]
       ))}));
 
 beforeAll(() => server.listen());
@@ -27,8 +27,8 @@ test("gets assignee issues", async() => {
     server.use(
         rest.get(`${API}issue/${owner}/${repo}/assignee/${assignee}`, (req, res, ctx) => {
             return res(ctx.status(200), ctx.json(
-                {items: [{title: 'issue1'},
-                        {title: 'issue2'}]}
+                [{title: 'issue1'},
+                        {title: 'issue2'}]
             ))}));
     const content = await GetAssigneeIssues([assignee],  repo, owner);
 
@@ -39,7 +39,7 @@ test("zero assignee issues", async() => {
     server.use(
         rest.get(`${API}issue/${owner}/${repo}/assignee/${assignee}`, (req, res, ctx) => {
             return res(ctx.status(200), ctx.json(
-                {items: []}
+                 []
             ))}));
     const content = await GetAssigneeIssues([assignee],  repo, owner);
 

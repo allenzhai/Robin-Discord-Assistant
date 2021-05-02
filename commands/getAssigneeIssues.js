@@ -13,8 +13,8 @@ module.exports = async function(args, repo, owner) {
 
     var names = [];
     var responseData = response.data;
-    for (var i = 0; i < responseData.items.length; i++) {
-        names.push(responseData.items[i].title);
+    for (var i = 0; i < responseData.length; i++) {
+        names.push(responseData[i].title);
     }
 
     if (names.length == 0) {
