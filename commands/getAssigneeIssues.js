@@ -12,9 +12,11 @@ module.exports = async function(args, repo, owner) {
     }
 
     var names = [];
+    var number = [];
     var responseData = response.data;
     for (var i = 0; i < responseData.length; i++) {
         names.push(responseData[i].title);
+        number.push(responseData[i].number);
     }
 
     if (names.length == 0) {
@@ -23,7 +25,7 @@ module.exports = async function(args, repo, owner) {
     else{
         message = `Here are the ${names.length} issues assigned to ${assignee}: `;
         for (var j = 0; j < names.length; j++) {
-            message += names[j];
+            message += `(${number[j]}) ${names[j]}`
             if (j == names.length - 1) {
                 message += '.';
             }

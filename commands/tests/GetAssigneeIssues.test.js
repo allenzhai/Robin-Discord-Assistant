@@ -10,7 +10,7 @@ const assignee = 'Alice'
 const server = setupServer(
     rest.get(`${API}issue/${owner}/${repo}/assignee/${assignee}`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(
-          [{title: 'issue1'}]
+          [{title: 'issue1', number: 1}]
       ))}));
 
 beforeAll(() => server.listen());
@@ -20,19 +20,19 @@ afterEach(() => server.resetHandlers());
 test("gets assignee issue", async() => {
     const content = await GetAssigneeIssues([assignee],  repo, owner);
 
-    expect(content).toBe("Here are the 1 issues assigned to Alice: issue1.");
+    expect(content).toBe("Here are the 1 issues assigned to Alice: (1) issue1.");
 });
 
 test("gets assignee issues", async() => {
     server.use(
         rest.get(`${API}issue/${owner}/${repo}/assignee/${assignee}`, (req, res, ctx) => {
             return res(ctx.status(200), ctx.json(
-                [{title: 'issue1'},
-                        {title: 'issue2'}]
+                [{title: 'issue1', number: 1},
+                        {title: 'issue2', number: 2}]
             ))}));
     const content = await GetAssigneeIssues([assignee],  repo, owner);
 
-    expect(content).toBe("Here are the 2 issues assigned to Alice: issue1, issue2.");
+    expect(content).toBe("Here are the 2 issues assigned to Alice: (1) issue1, (2) issue2.");
 });
 
 test("zero assignee issues", async() => {
