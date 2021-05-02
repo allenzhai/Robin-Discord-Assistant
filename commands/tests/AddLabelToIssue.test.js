@@ -8,7 +8,7 @@ const repo = "TestRepo"
 const issue_num = 1337
 
 const server = setupServer(
-    rest.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`, (req, res, ctx) => {
+    rest.get(`${API}issue/${owner}/${repo}/${issue_num}`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json({
           "number": 1337,
           "labels": [
@@ -39,7 +39,7 @@ test("adds label to issue", async() => {
 
 test("handles failure", async() => {
   server.use(
-    rest.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`, (req, res, ctx) => {
+    rest.get(`${API}issue/${owner}/${repo}/${issue_num}`, (req, res, ctx) => {
       return res(ctx.status(404))}),
     rest.patch(`${API}issue/${owner}/${repo}/${issue_num}/update`, (req, res, ctx) => {
       return res(ctx.status(404))

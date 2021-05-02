@@ -8,7 +8,7 @@ module.exports = async function(args, repo, owner, token) {
     labels = labels.split(", ");
     const issue_num = args[1];
     var message = `There was a problem adding ${args[0]} to ${issue_num}`;
-    const response = await axios.get(`${API}issue/${owner}/${repo}/issues/${issue_num}`);
+    const response = await axios.get(`${API}issue/${owner}/${repo}/${issue_num}`);
     
     if (response.status == 200) {
         var issueLabels = [];
@@ -23,11 +23,11 @@ module.exports = async function(args, repo, owner, token) {
         }
         
         const body = {
-            labels : issueLabels,
-            token  : token
+            labels : issueLabels
+            ,token : token
         }
-
-        const result = await axios.patch(`${API}issue/${owner}/${repo}/${issue_num}/update`,
+        
+        const result = await axios.post(`${API}issue/${owner}/${repo}/${issue_num}/update`,
             body            
         );
 

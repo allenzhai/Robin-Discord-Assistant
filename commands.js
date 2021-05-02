@@ -63,7 +63,7 @@ module.exports = async function(message, users) {
             await message.author.send(`Updated Token to ${token}`);
         }
         else{
-            reply = await commands[command](args);
+            reply = await commands[command](args, repo, owner, users[message.author.id]);
             console.log(reply);
             await message.author.send(reply);
         }
