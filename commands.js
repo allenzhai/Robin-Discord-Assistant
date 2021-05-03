@@ -27,6 +27,7 @@ const GetUnassignedTasks        = require("./commands/GetUnassignedTasks.js");
 const GetBuildStatus            = require("./commands/GetBuildStatus.js");
 const Help                      = require("./commands/Help.js");
 const SetGithubToken            = require("./commands/SetGithubToken.js");
+const SignIn                    = require("./commands/SignIn.js");
 
 const aesjs = require('aes-js');
 
@@ -35,7 +36,7 @@ const aesjs = require('aes-js');
 const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
     GetLabels, GetAssigneeIssues, GetIssuesWithLabel, SetOwnerName, SetRepoName, GetIssueAssignees, GetMedianReviewTime, 
     MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
-    GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken};
+    GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken,};
 
 module.exports = async function(message, users) {
     let args = message.content.split(" ");
@@ -46,6 +47,8 @@ module.exports = async function(message, users) {
         console.log("Valid Robin Command");
         command = command.substring(1);
         console.log(command);
+        owner = 'allenzhai';
+        repo = 'Psychify'
 
         if (command === "SetGithubToken"){
             var token = await commands[command](args);
@@ -63,8 +66,7 @@ module.exports = async function(message, users) {
             await message.author.send(`Updated Token to ${token}`);
         }
         else{
-            reply = await commands[command](args, repo, owner, users[message.author.id]);
-            console.log(reply);
+            reply = await commands[command](args, repo, owner, users.get(message.author.id));
             await message.author.send(reply);
         }
     }
