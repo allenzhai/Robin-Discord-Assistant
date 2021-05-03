@@ -7,8 +7,10 @@ const commandHandler = require("./commands");
 
 client.login(process.env.BOTTOKEN);
 
-users = new Map();
+userRepos = new Map();
+userOwners = new Map();
+userTokens = new Map();
 
 client.on('message', (msg) => {
-    commandHandler(msg, users);
+    commandHandler(msg, userRepos, userOwners, userTokens);
 });

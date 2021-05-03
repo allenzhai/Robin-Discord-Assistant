@@ -38,7 +38,7 @@ const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToI
     MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
     GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken,};
 
-module.exports = async function(message, users) {
+module.exports = async function(message, userRepos, userOwners, userTokens) {
     let args = message.content.split(" ");
     let command =  args.shift();
 
@@ -60,11 +60,30 @@ module.exports = async function(message, users) {
             var aesCtr = new aesjs.ModeOfOperation.ctr(key);
             var encryptedBytes = aesCtr.encrypt(textBytes);
             var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-            users.set(message.author.id, encryptedHex);
+            userTokens.set(message.author.id, encryptedHex);
             await message.author.send(`Updated Token to ${token}`);
         }
+        else if (command === "SetRepoName") {
+            await commands[command](args, message.author.id, userRepos);
+            message.author.send(`Set Repo name to ${args[0]}`);
+        }
+        else if (command === "SetOwnerName") {
+            await commands[command](args, message.author.id, userOwners);
+            message.author.send(`Set Owner name to ${args[0]}`);
+        }
         else{
-            reply = await commands[command](args, repo, owner, users.get(message.author.id));
+            reply = '';
+            if (!userRepos.get(message.author.id)) {
+                reply = "\nPlease set the Repository name with #SetRepoName [name]\n";
+            }
+            if (!userOwners.get(message.author.id)) {
+                reply += "Please set the Owner name with #SetOwnerName [name]\n";
+            }
+            if (userRepos.get(message.author.id) && userOwners.get(message.author.id))
+            reply = await commands[command](args, 
+                                            userRepos.get(message.author.id), 
+                                            userOwners.get(message.author.id), 
+                                            userTokens.get(message.author.id));
             await message.author.send(reply);
         }
     }
