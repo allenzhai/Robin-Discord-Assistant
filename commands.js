@@ -47,8 +47,6 @@ module.exports = async function(message, users) {
         console.log("Valid Robin Command");
         command = command.substring(1);
         console.log(command);
-        owner = 'allenzhai';
-        repo = 'Psychify'
 
         if (command === "SetGithubToken"){
             var token = await commands[command](args);
