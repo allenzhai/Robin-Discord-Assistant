@@ -1,3 +1,3 @@
-module.exports = function(message, args) {
-    message.channel.send("Command not yet built");
+module.exports = function(args, id, userOwners) {
+    userOwners.set(id, args[0]);
 }
