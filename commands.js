@@ -18,7 +18,7 @@ const MergeBranch               = require("./commands/MergeBranch.js");
 const MergePR                   = require("./commands/MergePR.js");
 const NumIssues                 = require("./commands/NumIssues.js");
 const CreatePR                  = require("./commands/CreatePR.js");
-const NumPrs                    = require("./commands/NumPrs.js");
+const NumPRs                    = require("./commands/NumPrs.js");
 const GetPROwners               = require("./commands/GetPROwners.js");
 const GetOldestIssue            = require("./commands/GetOldestIssue.js");
 const GetNumAssignedOpenIssues  = require("./commands/GetNumAssignedOpenIssues.js");
@@ -35,7 +35,7 @@ const aesjs = require('aes-js');
 
 const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
     GetLabels, GetAssigneeIssues, GetIssuesWithLabel, SetOwnerName, SetRepoName, GetIssueAssignees, GetMedianReviewTime, 
-    MergeBranch, MergePR, NumIssues, CreatePR, NumPrs, GetPROwners, GetOldestIssue, 
+    MergeBranch, MergePR, NumIssues, CreatePR, NumPRs, GetPROwners, GetOldestIssue, 
     GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken,};
 
 module.exports = async function(message, userRepos, userOwners, userTokens) {
