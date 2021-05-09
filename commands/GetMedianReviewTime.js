@@ -59,13 +59,11 @@ module.exports = async function(args, repo, owner, token) {
     var responses = [];
     var dateParsed = calcDate(num, time, date);
     var result = await axios.get(`${API}pr/${owner}/${repo}/${dateParsed}/${pageNum}`);
-    console.log(`${API}pr/${owner}/${repo}/${dateParsed}/${pageNum}`);
     if (result.status !== 200)
     {
         message = `There seems to be a problem getting the start date to calculate the median review time.`
     }
     var count = result.data.total_count;
-    console.log(result.data.total_count)
 
     if (count == 0) {
         message = `No pull requests have been closed since ${dateParsed}`;
