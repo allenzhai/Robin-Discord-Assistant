@@ -7,7 +7,7 @@ const owner = "John"
 const repo = "TestRepo"
 
 const server = setupServer(
-    rest.get(`${API}issue/${owner}/${repo}/1/1`, (req, res, ctx) => {
+    rest.get(`${API}issue/${owner}/${repo}/1/100`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.json({
           total_count: 4,
       }))}));
@@ -24,7 +24,7 @@ test("gets count for issues", async() => {
 
 test("handles failure", async() => {
   server.use(
-    rest.get(`${API}issue/${owner}/${repo}/1/1`, (req, res, ctx) => {
+    rest.get(`${API}issue/${owner}/${repo}/1/100`, (req, res, ctx) => {
       return res(ctx.status(404))})
   );
 
