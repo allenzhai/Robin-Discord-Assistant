@@ -30,7 +30,7 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
-test("returns approval names", async() => {
+test("returns last contributor for a given file", async() => {
     const content = await GetLastContributor([file, branch], repo, owner);
 
     expect(content).toBe("The last contributor to test.js in the main branch was Alice.");

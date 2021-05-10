@@ -19,7 +19,7 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
-test("gets issue with label", async() => {
+test("returns unassigned tasks", async() => {
     const content = await GetUnassignedTasks([],  repo, owner);
 
     expect(content).toBe("There are a total of 2 unassigned issues:\n1 test1,\n2 test2.");
