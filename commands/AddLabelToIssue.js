@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 const API = 'https://robinrestapi.herokuapp.com/';
+// const API = 'https://localhost:5000/';
 
 // #AddLabelToIssue label issueNum
 module.exports = async function(args, repo, owner, token) {
@@ -24,10 +25,9 @@ module.exports = async function(args, repo, owner, token) {
         
         const body = {
             labels : issueLabels,
-            token : token
         }
         
-        const result = await axios.post(`${API}issue/${owner}/${repo}/${issue_num}/update`,
+        const result = await axios.patch(`${API}issue/${owner}/${repo}/${issue_num}/update`,
             body            
         );
 

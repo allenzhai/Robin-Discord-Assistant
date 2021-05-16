@@ -7,7 +7,6 @@ findBranchSHA = function (response, branch) {
         var nameLower = responseData[i].name.toLowerCase();
         if (nameLower.localeCompare(branch) == 0)
         {
-            console.log(responseData[i].commit.sha);
             return responseData[i].commit.sha
         }
     }
@@ -42,7 +41,6 @@ findFile = async function (response, file) {
             if( path_files.indexOf(fileLower) > -1 ) 
         if( path_files.indexOf(fileLower) > -1 ) 
         {
-            console.log("found file");
             all_paths.push(blob_name[i]);
         }
     }
