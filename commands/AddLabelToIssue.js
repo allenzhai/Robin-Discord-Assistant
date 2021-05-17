@@ -1,9 +1,7 @@
 const axios = require('axios');
 
 const API = 'https://robinrestapi.herokuapp.com/';
-// const API = 'https://localhost:5000/';
 
-// #AddLabelToIssue label issueNum
 module.exports = async function(args, repo, owner, token) {
     var labels = args[0];
     labels = labels.split(", ");
