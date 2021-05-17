@@ -26,17 +26,13 @@ const GetLastContributor        = require("./commands/GetLastContributor.js");
 const GetUnassignedTasks        = require("./commands/GetUnassignedTasks.js");
 const GetBuildStatus            = require("./commands/GetBuildStatus.js");
 const Help                      = require("./commands/Help.js");
-const SetGithubToken            = require("./commands/SetGithubToken.js");
 const SignIn                    = require("./commands/SignIn.js");
-
-const aesjs = require('aes-js');
-
 
 
 const commands = { ApprovePR, GetReviewers, CreateIssue, CloseIssue, AddLabelToIssue, AddUserToIssue, CreateIssueComment, 
     GetLabels, GetAssigneeIssues, GetIssuesWithLabel, SetOwnerName, SetRepoName, GetIssueAssignees, GetMedianReviewTime, 
     MergeBranch, MergePR, NumIssues, CreatePR, NumPRs, GetPROwners, GetOldestIssue, 
-    GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SetGithubToken, SignIn};
+    GetNumAssignedOpenIssues, GetLastContributor, GetUnassignedTasks, GetBuildStatus, Help, SignIn};
 
 module.exports = async function(message, userRepos, userOwners, userTokens) {
     let args = message.content.split(" ");
@@ -48,22 +44,7 @@ module.exports = async function(message, userRepos, userOwners, userTokens) {
         command = command.substring(1);
         console.log(command);
 
-        if (command === "SetGithubToken"){
-            var token = await commands[command](args);
-            var key = [];
-            for (var i = 0; i < process.env.KEY.length; i++) {
-                key.push(process.env.KEY.charCodeAt(i));
-            }
-
-            var textBytes = aesjs.utils.utf8.toBytes(token);
-
-            var aesCtr = new aesjs.ModeOfOperation.ctr(key);
-            var encryptedBytes = aesCtr.encrypt(textBytes);
-            var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-            userTokens.set(message.author.id, encryptedHex);
-            await message.author.send(`Updated Token to ${token}`);
-        }
-        else if (command === "SetRepoName") {
+        if (command === "SetRepoName") {
             await commands[command](args, message.author.id, userRepos);
             message.author.send(`Set Repo name to ${args[0]}`);
         }
@@ -79,12 +60,14 @@ module.exports = async function(message, userRepos, userOwners, userTokens) {
             if (!userOwners.get(message.author.id)) {
                 reply += "Please set the Owner name with #SetOwnerName [name]\n";
             }
-            if (userRepos.get(message.author.id) && userOwners.get(message.author.id))
-            reply = await commands[command](args, 
-                                            userRepos.get(message.author.id), 
-                                            userOwners.get(message.author.id), 
-                                            userTokens.get(message.author.id));
-            await message.author.send(reply);
+            if (userRepos.get(message.author.id) && userOwners.get(message.author.id)){
+                reply = await commands[command](args, 
+                                                userRepos.get(message.author.id), 
+                                                userOwners.get(message.author.id), 
+                                                userTokens.get(message.author.id));
+                await message.author.send(reply);
+            }
+
         }
     }
     // check if it is a text channel
