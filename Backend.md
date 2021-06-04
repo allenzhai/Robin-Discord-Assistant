@@ -25,5 +25,5 @@ This design relays the responsbility and risk to Github.
 ## Limitations
 The backend does not have any database support so it can not handle more than one user at a time. Future work would include:
 - Setting up a database to store user to personal access tokens.
-- logic for switching between tokens when making requests
-- moving storage of repo name and owner name per user to newly created database.
+- Creating logic for switching between tokens when making requests
+- Moving storage of repo name and owner name per user to newly created database.
