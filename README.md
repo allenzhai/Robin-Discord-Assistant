@@ -12,10 +12,23 @@
 
 ## Setup
 
+### Users
 To invite Robin to your team's Discord Server follow this [invite link](https://discord.com/api/oauth2/authorize?client_id=800926894282637344&permissions=92160&scope=bot)
 - Select the server and select "Coninute"
 - For Robin to to be fully functional, Robin must be able to send and manage messages and embed links. Select "Authorize".
 - Robin should now be ready and listenning in the server.
+
+### Developers 
+- Download this repository and in the project directory:
+```sh
+npm install
+```
+- Now visit Discord's [developer portal applications](https://discord.com/developers/applications). In here, create a new application with the name "Robin". On the sidebar, click bot. In the bot page, Add a bot and then copy the bot token.
+- In the project repository, create a file named .env. In .env, create a variable name BOTTOKEN and set it to your bot token. "BOTTOKEN={bot token here}.
+- To run the bot, make sure to follow the instructions for users and invite the bot to a sever. However the invite link to your own bot can be retrieved under the OAuth2 tab in the Discord developer portal. Once the bot is in your server, run:
+```sh
+node ./bot.js
+```
 
 ## Commands
 
