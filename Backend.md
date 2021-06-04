@@ -20,3 +20,10 @@ This design relays the responsbility and risk to Github.
 - A response route was made for the Authorization callback after the user signed in through the Github link.
 - The Github link to sign in, which included the client_id and permissions was given to the user through the Discord interaction between the user and Robin.
 - Once the user signed in, the only place that the token is stored is in the backend once it is recieved through the Authorization callback url.
+
+
+## Limitations
+The backend does not have any database support so it can not handle more than one user at a time. Future work would include:
+- Setting up a database to store user to personal access tokens.
+- logic for switching between tokens when making requests
+- moving storage of repo name and owner name per user to newly created database.
