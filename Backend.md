@@ -19,4 +19,4 @@ This design relays the responsbility and risk to Github.
 - The client ID and Secret for the app was stored in Heroku
 - A response route was made for the Authorization callback after the user signed in through the Github link
 - The Github link to sign in, which included the client_id and permissions was given to the user through the Discord interaction between the user and Robin
-- Once the user signed in the only place that the token is stored is in the backend once it is recieved through the Authorization callback url 
+- Once the user signed in, the only place that the token is stored is in the backend once it is recieved through the Authorization callback url 
