@@ -6,52 +6,52 @@ module.exports =  function(which, repo, owner) {
             case 'Branch':
                 // Branch Commands
                 message += "\nCommands related to Branches:\n";
-                message += '#MergeBranch [base] [head] [message]\n';            // MergeBranch
+                message += '#MergeBranch [Base] [Head] [Message]\n';                                // MergeBranch
                 break;
             case 'Commit':
                 // Commit Commands
                 message += "\nCommands related to Commits:\n";
-                message += '#GetBuildStatus [commit SHA]\n';                    //GetBuildStatus 
+                message += '#GetBuildStatus [PR Number]\n';                                        //GetBuildStatus 
                 break;
             case 'Issue':
                 // Issue Commands
-                message += "\nCommands related to Issues:\n";
-                message += '#AddLabelToIssue [label] [issue number]\n';         // AddLabelToIssue
-                message += '#AddUserToIssue [user] [issue]\n';                  // AddUserToIssue        
-                message += '#CloseIssue [issue number] [comment]\n';          // CloseIssue
-                message += '#CreateIssue [title] [labels] [assignees]\n';       // CreateIssue
-                message += '#CreateIssueComment [issue number] [comment]\n';    // CreateIssueComment
-                message += '#GetAssigneeIssues [assignee]\n';                   // GetAssigneeIssues
-                message += '#GetIssueAssignees [issue number]\n';               // GetIssueAssignees
-                message += '#GetIssuesWithLabel [label]\n';                     // GetIssuesWithLabel
-                message += '#GetNumAssignedOpenIssues\n';                       // GetNumAssignedOpenIssues
-                message += '#GetOldestIssue\n';                                 // GetOldestIssue
-                message += '#NumIssues\n';                                      // NumIssues
+                message += "\nCommands related to Issues: Arguments that are lists are seperated by commas\n";
+                message += '#AddLabelToIssue [Labels] [Issue Number]\n';                          // AddLabelToIssue
+                message += '#AddUserToIssue [Users] [Issue Number]\n';                            // AddUserToIssue        
+                message += '#CloseIssue [Issue Number]\n';                                        // CloseIssue
+                message += '#CreateIssue [Title] [Optional Labels] [Optional Assignees]\n';       // CreateIssue
+                message += '#CreateIssueComment [Issue Number] [Comment]\n';                      // CreateIssueComment
+                message += '#GetAssigneeIssues [Assignee]\n';                                     // GetAssigneeIssues
+                message += '#GetIssueAssignees [Issue Number]\n';                                 // GetIssueAssignees
+                message += '#GetIssuesWithLabel [Label]\n';                                       // GetIssuesWithLabel
+                message += '#GetNumAssignedOpenIssues\n';                                         // GetNumAssignedOpenIssues
+                message += '#GetOldestIssue\n';                                                   // GetOldestIssue
+                message += '#NumIssues\n';                                                        // NumIssues
                 break;
             case 'PR':
                 // PR Commands
                 message += "\nCommands related to PRs:\n";
-                message += '#ApprovePR [PR number] [comment]\n';              // ApprovePR
-                message += '#CreatePR [title] [head branch] [base branch]\n';   // CreatePR
+                message += '#ApprovePR [PR number]\n';                          // ApprovePR
+                message += '#CreatePR [Title] [Base] [Head]\n';                 // CreatePR
                 message += '#GetMedianReviewTime\n';                            // GetMedianReviewTime
                 message += '#GetPROwners\n';                                    // GetPROwners
-                message += '#GetReviewers [PR number]\n';                       // GetReviewers
-                message += '#MergePR [PR number] [message]\n';                  // Merge PR
+                message += '#GetReviewers [PR Number]\n';                       // GetReviewers
+                message += '#MergePR [PR Number] [Message]\n';                  // Merge PR
                 message += '#NumPRs\n';                                         // NumPRs
                 break;
             case 'Repo':
                 // Repository Commands
                 message += "\nCommands related to Repos:\n";
-                message += '#GetLabels [issue number]\n';                       // GetLabels
+                message += '#GetLabels\n';                                      // GetLabels
                 message += '#GetLastContributor\n';                             // GetLastContributor   
                 message += '#GetUnassignedTasks\n';                             // GetUnassignedTasks
                 break;
             case 'Settings':
                 // User Commands
                 message += "\nCommands for setting up session:\n";
-                message += '#SetOwnerName [owner]\n';                          // GiveOwnerName
-                message += '#SetRepoName [repo name]\n';                       // GiveRepoName
-                message += '#SetGithubToken [token]\n';                        // SetGithubToken
+                message += '#SetOwnerName [Owner]\n';                          // GiveOwnerName
+                message += '#SetRepoName [Repo Name]\n';                       // GiveRepoName
+                message += '#SignIn\n';                                        // SignIn
                 break;
             }
     }
