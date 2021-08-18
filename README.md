@@ -30,6 +30,8 @@ npm install
 node ./bot.js
 ```
 
+- Robin's endpoints: [Documentation](https://robinrestapi.herokuapp.com/api-docs/#/)
+
 ## Commands
 
 - All commands that start with "#" are detected and parsed by Robin.
